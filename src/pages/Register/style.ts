@@ -4,6 +4,10 @@ import { COLORS } from "../../styles/Colors";
 
 export const Section = styled.div`
   padding: 0 2rem 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 4rem);
 `;
 
 export const WrapperForm = styled.div`

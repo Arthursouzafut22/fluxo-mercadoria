@@ -20,6 +20,11 @@ export const WrapperHeader = styled.div`
     gap: 14px;
     padding: 6px;
 
+    @media (max-width: 767px) {
+      gap: 10px;
+      padding: 6px;
+    }
+
     span {
       font-size: 10px;
       display: block;

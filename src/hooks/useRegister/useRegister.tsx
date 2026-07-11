@@ -1,21 +1,15 @@
 import { toast } from "react-toastify";
-import type { FormRegister } from "../pages/Register/types/type";
-import { registerUser } from "../services/registerService";
+import type { FormRegister } from "../../pages/Register/types/type";
+import { RegisterService } from "../../services/registerService";
 import { useNavigate } from "react-router";
-
-type PayloadUser = {
-  data: null;
-  success: boolean;
-  message: string;
-};
+import type { UserPayload } from "./types";
 
 export function useRegister() {
   const navigate = useNavigate();
-  
+
   async function onsubmit(data: FormRegister) {
     try {
-      const user = (await registerUser(data)) as PayloadUser;
-      console.log(user);
+      const user = (await RegisterService.createUser(data)) as UserPayload;
 
       if (user.success) {
         toast.success(user.message);
@@ -24,7 +18,6 @@ export function useRegister() {
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast.error(error.message);
-        console.log(error.message);
       }
     }
   }
