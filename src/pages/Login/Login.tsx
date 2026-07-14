@@ -6,9 +6,9 @@ import { SchemaAuth } from "../../schemas/authSchema";
 import * as S from "./style";
 import { useForm } from "react-hook-form";
 import type { LoginForm } from "./types/type";
-import { Loading } from "../../components/Loading/Loading";
 import Toast from "../../components/toast/Toast";
 import { useLoginForm } from "../../hooks/useLoginForm/useLoginForm ";
+import Loading from "../../components/Loading/Loading";
 
 export default function Login() {
   const {

@@ -8,7 +8,7 @@ import type { FormRegister } from "./types/type";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SchemaRegister } from "../../schemas/registerSchema";
 import Toast from "../../components/toast/Toast";
-import { Loading } from "../../components/Loading/Loading";
+import Loading from "../../components/Loading/Loading";
 
 export default function Register() {
   const { onsubmit } = useRegister();

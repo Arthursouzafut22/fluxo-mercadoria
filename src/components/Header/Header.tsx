@@ -8,7 +8,7 @@ import { useAuth } from "../../context/Auth/useAuth";
 import { useMedia } from "../../hooks/useMedia/useMedia";
 import MobileMenu from "./MobileMenu";
 
-export function Header() {
+export default function Header() {
   const { logout } = useAuth();
   const { mobile } = useMedia("(max-width:767px)");
 
