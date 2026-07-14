@@ -1,18 +1,20 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import Home from "../pages/Home/Home";
 import PrivateRouter from "../components/private/PrivateRouter";
+import { Header } from "../components/header/Header";
+import Dashboard from "../pages/Dashboard/Dashboard";
 
 export function RoutesAplicattion() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route
-          path="/"
+          path="/dashboard"
           element={
             <PrivateRouter>
-              <Home />
+              <Dashboard />
             </PrivateRouter>
           }
         />

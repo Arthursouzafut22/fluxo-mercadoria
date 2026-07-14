@@ -17,16 +17,16 @@ export const WrapperHeader = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 14px;
-    padding: 6px;
+    gap: 0.88rem;
+    padding: 0.38rem;
 
     @media (max-width: 767px) {
-      gap: 10px;
-      padding: 6px;
+      gap: 0.63rem;
+      padding: 0.38rem;
     }
 
     span {
-      font-size: 10px;
+      font-size: 0.63rem;
       display: block;
       color: ${COLORS.primary_yellow};
       letter-spacing: 0.35rem;

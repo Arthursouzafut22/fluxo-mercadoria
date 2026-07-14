@@ -18,8 +18,6 @@ export function useLoginForm() {
         login(auth.accessToken as string);
         setTimeout(() => navigate("/"), 2000);
       }
-
-      return auth;
     } catch (error: unknown) {
       if (error instanceof Error) {
         toast.error(error.message);

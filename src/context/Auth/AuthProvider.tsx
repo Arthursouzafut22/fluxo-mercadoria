@@ -1,7 +1,9 @@
 import { useState, type PropsWithChildren } from "react";
 import { AuthContext } from "./AuthContext";
+// import { User } from "./types";
 
 export function AuthProvider({ children }: PropsWithChildren) {
+//   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState(() => {
     const getToken = localStorage.getItem("token");
     return getToken ? getToken : null;
@@ -18,7 +20,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
     window.location.href = "/login";
   }
 
-//   async function getCurrentUser() {}
+  //   async function getCurrentUser() {}
 
   return (
     <AuthContext.Provider value={{ token, login, logout }}>
