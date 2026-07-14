@@ -1,12 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import AuthHeader from "../../components/authHeader/AuthHeader";
-import Button from "../../components/button/Button";
+import AuthHeader from "../../components/AuthHeader/AuthHeader";
+import Button from "../../components/Button/Button";
 import { Input } from "../../components/Input/Input";
 import { SchemaAuth } from "../../schemas/authSchema";
 import * as S from "./style";
 import { useForm } from "react-hook-form";
 import type { LoginForm } from "./types/type";
-import { Loading } from "../../components/loading/Loading";
+import { Loading } from "../../components/Loading/Loading";
 import Toast from "../../components/toast/Toast";
 import { useLoginForm } from "../../hooks/useLoginForm/useLoginForm ";
 

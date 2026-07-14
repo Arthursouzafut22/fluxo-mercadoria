@@ -1,5 +1,5 @@
 import type { ComponentPropsWithoutRef } from "react";
-import * as S from "./style";
+import * as S from "./style"
 
 type ButtonProps = ComponentPropsWithoutRef<"button">;
 

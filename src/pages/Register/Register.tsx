@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import AuthHeader from "../../components/authHeader/AuthHeader";
-import Button from "../../components/button/Button";
+import AuthHeader from "../../components/AuthHeader/AuthHeader";
+import Button from "../../components/Button/Button";
 import { Input } from "../../components/Input/Input";
 import { useRegister } from "../../hooks/useRegister/useRegister";
 import * as S from "./style";
@@ -8,7 +8,7 @@ import type { FormRegister } from "./types/type";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SchemaRegister } from "../../schemas/registerSchema";
 import Toast from "../../components/toast/Toast";
-import { Loading } from "../../components/loading/Loading";
+import { Loading } from "../../components/Loading/Loading";
 
 export default function Register() {
   const { onsubmit } = useRegister();
