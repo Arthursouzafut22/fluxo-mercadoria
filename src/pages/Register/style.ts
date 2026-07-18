@@ -13,10 +13,10 @@ export const Section = styled.div`
 export const WrapperForm = styled.div`
   background-color: ${COLORS.primary_card};
   padding: 2rem;
-  max-width: 384px;
+  max-width: 24rem;
   width: 100%;
   margin: 0 auto;
-  border-radius: 6px;
+  border-radius: 0.38rem;
   border-width: 1px;
   border-width: 1px;
   border-style: solid;

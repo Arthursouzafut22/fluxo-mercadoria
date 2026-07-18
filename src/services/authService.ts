@@ -10,6 +10,7 @@ export class AuthService {
         body: JSON.stringify(data),
       });
       const payload = await response.json();
+      console.log(payload)
 
       if (!response.ok) {
         throw new Error(payload.message);

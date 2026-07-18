@@ -16,7 +16,7 @@ export const WrapperForm = styled.div`
   max-width: 384px;
   width: 100%;
   margin: 0 auto;
-  border-radius: 6px;
+  border-radius: 0.38rem;
   border-width: 1px;
   border-width: 1px;
   border-style: solid;

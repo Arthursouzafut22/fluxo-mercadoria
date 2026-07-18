@@ -13,7 +13,7 @@ export const WrapperHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 0.63rem;
-  padding: 1rem 1.5rem; // 16px 24px
+  padding: 1rem 1.5rem;
 
   button {
     font-size: 0.75rem;

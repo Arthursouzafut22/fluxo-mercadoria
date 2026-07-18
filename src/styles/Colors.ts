@@ -5,4 +5,6 @@ export const COLORS = {
   primary_input: "#24211e",
   primary_card: "#181613",
   primary_font_foreground: "#f2eee7",
+  primary_success: "#43a65f",
+  primary_red: "#db2b33",
 } as const;

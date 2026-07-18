@@ -12,11 +12,11 @@ export function useLoginForm() {
   async function onsubmit(data: LoginForm) {
     try {
       const auth = (await AuthService.Login(data)) as AuthPayload;
-
+      
       if (auth.success === true) {
         toast.success(auth.message);
         login(auth.accessToken as string);
-        setTimeout(() => navigate("/"), 2000);
+        setTimeout(() => navigate("/dashboard"), 2000);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
