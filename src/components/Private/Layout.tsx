@@ -1,18 +1,11 @@
-import { useLocation } from "react-router";
+import { Outlet } from "react-router-dom";
 import Header from "../../components/Header/Header";
-import type { ReactNode } from "react";
 
-export function Layout({ children }: { children: ReactNode }) {
-  const { pathname } = useLocation();
-
-  if (pathname === "/login" || pathname === "/register") {
-    return children;
-  }
-
+export function Layout() {
   return (
     <>
       <Header />
-      {children}
+      <Outlet />
     </>
   );
 }

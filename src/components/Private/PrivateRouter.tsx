@@ -1,9 +1,12 @@
-import type { ReactNode } from "react";
-import { Navigate } from "react-router";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/Auth/useAuth";
 
-export default function PrivateRouter({ children }: { children: ReactNode }) {
+export default function PrivateRouter() {
   const { token } = useAuth();
 
-  return !token ? <Navigate to={"/login"} /> : children;
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <Outlet />;
 }

@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { COLORS } from "../../styles/Colors";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 export const Section = styled.div`
   padding: 0 2rem 0 2rem;

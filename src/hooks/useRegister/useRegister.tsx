@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
 import type { FormRegister } from "../../pages/Register/types/type";
 import { RegisterService } from "../../services/registerService";
-import { useNavigate } from "react-router";
 import type { UserPayload } from "./types";
+import { useNavigate } from "react-router-dom";
 
 export function useRegister() {
   const navigate = useNavigate();

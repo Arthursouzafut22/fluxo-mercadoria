@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 import { COLORS } from "../../styles/Colors";
 
 export const Header = styled.header`

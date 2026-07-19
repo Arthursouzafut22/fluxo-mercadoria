@@ -56,8 +56,7 @@ export const CardDefaultDashboard = styled.div`
     color: ${COLORS.primary_font_color};
 
     @media (max-width: 767px) {
-      font-size: 0.870rem;
+      font-size: 0.87rem;
     }
   }
 `;
-

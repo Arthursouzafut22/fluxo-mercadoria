@@ -1,9 +1,9 @@
 import type { LoginForm } from "../../pages/Login/types/type";
 import { AuthService } from "../../services/authService";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
 import type { AuthPayload } from "./types";
 import { useAuth } from "../../context/Auth/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export function useLoginForm() {
   const navigate = useNavigate();
