@@ -1,5 +1,5 @@
-import type { FormRegister } from "../pages/Register/types/type";
-import { API_URL } from "./api";
+import type { FormRegister } from "../../pages/Register/types/type";
+import { API_URL } from "../api";
 
 export class RegisterService {
   static async createUser(data: FormRegister) {

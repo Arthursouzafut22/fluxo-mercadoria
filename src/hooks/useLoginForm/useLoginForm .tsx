@@ -1,5 +1,5 @@
 import type { LoginForm } from "../../pages/Login/types/type";
-import { AuthService } from "../../services/authService";
+import { AuthService } from "../../services/auth/authService";
 import { toast } from "react-toastify";
 import type { AuthPayload } from "./types";
 import { useAuth } from "../../context/Auth/useAuth";

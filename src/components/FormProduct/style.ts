@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { COLORS } from "../../styles/Colors";
 
 export const WrapperForm = styled.div`
-  /* padding: calc(0.25rem * 12); */
   border-radius: calc(0.5rem + 4px);
   background-color: ${COLORS.primary_card};
   border: 1px solid #312d28;
@@ -57,24 +56,23 @@ export const BoxButton = styled.div`
   padding-top: calc(0.25rem * 2);
 `;
 
-export const Button = styled.button<{ color?: boolean }>`
+export const Button = styled.button<{ $color?: boolean }>`
   font-weight: 500;
   width: 100%;
   font-size: 0.875rem;
-  /* margin-top: calc(0.25rem * 4); */
   line-height: calc(1.25 / 0.875);
   cursor: pointer;
   border: none;
-  background-color: ${({ color }) =>
-    color ? "#00000000" : COLORS.primary_yellow};
+  background-color: ${({ $color }) =>
+    $color ? "#00000000" : COLORS.primary_yellow};
   padding-block: calc(0.25rem * 2);
-  border: 1px solid ${({ color }) => color && "#312d28"};
+  border: 1px solid ${({ $color }) => $color && "#312d28"};
   padding-block: calc(0.25rem * 2.5);
   border-radius: calc(0.5rem - 2px);
-  color: ${({ color }) => color && COLORS.primary_font_foreground};
+  color: ${({ $color }) => $color && COLORS.primary_font_foreground};
   transition: 0.2s;
 
   &:hover {
-    background-color: ${({ color }) => color && COLORS.primary_input};
+    background-color: ${({ $color }) => $color && COLORS.primary_input};
   }
 `;

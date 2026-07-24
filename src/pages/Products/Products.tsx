@@ -4,17 +4,13 @@ import LayoutModal from "../../components/LayoutModal/LayoutModal";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import * as S from "./style";
 import { FiPlus } from "react-icons/fi";
+import Toast from "../../components/toast/Toast";
 
 export default function Products() {
   const [active, setActive] = useState(false);
 
-  function openModal() {
-    setActive(true);
-  }
-
-  function closeModal() {
-    setActive(false);
-  }
+  const openModal = () => setActive(true);
+  const closeModal = () => setActive(false);
 
   return (
     <S.Main>
@@ -37,6 +33,7 @@ export default function Products() {
           <FormProduct closeModal={closeModal} />
         </LayoutModal>
       </Activity>
+      <Toast />
     </S.Main>
   );
 }

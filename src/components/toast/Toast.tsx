@@ -14,6 +14,7 @@ const Toast = () => {
       draggable
       pauseOnHover
       theme="light"
+      style={{ zIndex: 9999 }}
     />
   );
 };

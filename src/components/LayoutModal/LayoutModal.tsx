@@ -5,5 +5,9 @@ export default function LayoutModal({
   children,
   closeModal,
 }: LayoutModalProps) {
-  return <S.Layout onClick={closeModal}>{children}</S.Layout>;
+  return (
+    <S.Layout onClick={closeModal}>
+      {children}
+    </S.Layout>
+  );
 }

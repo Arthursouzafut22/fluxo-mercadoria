@@ -1,5 +1,5 @@
-import type { LoginForm } from "../pages/Login/types/type";
-import { API_URL } from "./api";
+import type { LoginForm } from "../../pages/Login/types/type";
+import { API_URL } from "../api";
 
 export class AuthService {
   public static async Login(data: LoginForm) {
@@ -10,7 +10,6 @@ export class AuthService {
         body: JSON.stringify(data),
       });
       const payload = await response.json();
-      console.log(payload)
 
       if (!response.ok) {
         throw new Error(payload.message);

@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import type { FormRegister } from "../../pages/Register/types/type";
-import { RegisterService } from "../../services/registerService";
+import { RegisterService } from "../../services/register/registerService";
 import type { UserPayload } from "./types";
 import { useNavigate } from "react-router-dom";
 
