@@ -1,7 +1,8 @@
 import { API_URL } from "../api";
+import type { ProductProps } from "./type";
 
-export class Product {
-  public static async getProduct(token: string) {
+export class GetProducts {
+  public static async execute(token: string): Promise<ProductProps[]> {
     try {
       const result = await fetch(API_URL + "/produtos", {
         headers: {

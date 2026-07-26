@@ -1,8 +1,8 @@
 import type { FormProductType } from "../../components/FormProduct/type";
 import { API_URL } from "../api";
 
-export class Product {
-  public static async crateProduct(data: FormProductType, token: string) {
+export class CreateProduct {
+  public static async execute(data: FormProductType, token: string) {
     try {
       const result = await fetch(API_URL + "/produtos", {
         method: "POST",

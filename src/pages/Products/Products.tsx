@@ -5,9 +5,12 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import * as S from "./style";
 import { FiPlus } from "react-icons/fi";
 import Toast from "../../components/toast/Toast";
+import { ProductsTable } from "../../components/ProductsTable/ProductsTable";
+import useProduct from "../../hooks/useProduct/useProduct";
 
 export default function Products() {
   const [active, setActive] = useState(false);
+  const { products } = useProduct();
 
   const openModal = () => setActive(true);
   const closeModal = () => setActive(false);
@@ -23,10 +26,14 @@ export default function Products() {
           </S.Button>
         </S.Div>
 
-        <S.EmptyState>
-          <p>Nenhum produto cadastrado.</p>
-          <button onClick={openModal}>Cadastrar o primeiro</button>
-        </S.EmptyState>
+        {products.length === 0 && (
+          <S.EmptyState>
+            <p>Nenhum produto cadastrado.</p>
+            <button onClick={openModal}>Cadastrar o primeiro</button>
+          </S.EmptyState>
+        )}
+
+        {products.length > 0 && <ProductsTable />}
       </S.Wrapper>
       <Activity mode={active ? "visible" : "hidden"}>
         <LayoutModal closeModal={closeModal}>

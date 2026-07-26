@@ -10,7 +10,7 @@ export class Reports {
         },
       });
       if (!response.ok) {
-        throw new Error("Erro ao buscar relatório");
+        throw new Error("Erro ao buscar relatório.");
       }
 
       return await response.json();
@@ -28,7 +28,7 @@ export class Reports {
         },
       });
       if (!response.ok) {
-        throw new Error("Erro ao buscar informações de estoque");
+        throw new Error("Erro ao buscar informações de estoque.");
       }
 
       return await response.json();
