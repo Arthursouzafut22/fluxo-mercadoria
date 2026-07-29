@@ -29,6 +29,10 @@ export const Table = styled.table`
   thead th:last-child,
   tbody td:last-child {
     width: 45px;
+
+    @media (max-width: 767px){
+        /* width: 100px; */
+    }
   }
 
   tbody td {

@@ -10,7 +10,7 @@ import useProduct from "../../hooks/useProduct/useProduct";
 
 export default function Products() {
   const [active, setActive] = useState(false);
-  const { products } = useProduct();
+  const { products, onsubmit, deleteProduct } = useProduct();
 
   const openModal = () => setActive(true);
   const closeModal = () => setActive(false);
@@ -33,11 +33,13 @@ export default function Products() {
           </S.EmptyState>
         )}
 
-        {products.length > 0 && <ProductsTable />}
+        {products.length > 0 && (
+          <ProductsTable products={products} deleteProduct={deleteProduct} />
+        )}
       </S.Wrapper>
       <Activity mode={active ? "visible" : "hidden"}>
         <LayoutModal closeModal={closeModal}>
-          <FormProduct closeModal={closeModal} />
+          <FormProduct closeModal={closeModal} onsubmit={onsubmit} />
         </LayoutModal>
       </Activity>
       <Toast />

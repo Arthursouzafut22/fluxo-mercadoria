@@ -31,6 +31,38 @@ export const DashboardCardGroup = styled.div`
   }
 `;
 
+export const ListProducts = styled.ul`
+  list-style: none;
+`;
+
+export const ProductItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  line-height: calc(1.25 / 0.875);
+  padding-block: calc(0.25rem * 3);
+  border-bottom: 1px solid #312d28;
+
+  div {
+    p:first-child {
+      color: ${COLORS.primary_font_foreground};
+      font-weight: 500;
+    }
+
+    p:last-child {
+      font-size: 0.75rem;
+      color: ${COLORS.primary_font_color};
+    }
+  }
+
+  .estoque {
+    font-size: 1.1rem;
+    color: ${COLORS.primary_yellow};
+    line-height: calc(2 / 1.5);
+  }
+`;
+
 export const CardDefaultDashboard = styled.div`
   padding: calc(0.25rem * 5);
   border-radius: calc(0.5rem + 4px);

@@ -4,11 +4,12 @@ import * as S from "./style";
 import type { FormProductProps, FormProductType } from "./type";
 import { SchemaProduct } from "../../schemas/productSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import useProduct from "../../hooks/useProduct/useProduct";
 import Loading from "../Loading/Loading";
 
-export default function FormProduct({ closeModal }: FormProductProps) {
-  const { onsubmit } = useProduct();
+export default function FormProduct({
+  closeModal,
+  onsubmit,
+}: FormProductProps) {
   const {
     register,
     reset,

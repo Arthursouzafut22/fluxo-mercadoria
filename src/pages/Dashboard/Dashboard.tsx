@@ -5,9 +5,12 @@ import * as S from "./style";
 import { FiTrendingDown, FiTrendingUp } from "react-icons/fi";
 import { LuDollarSign, LuPackage } from "react-icons/lu";
 import { COLORS } from "../../styles/Colors";
+import useProduct from "../../hooks/useProduct/useProduct";
+import { formatCurrencyBRL } from "../../utils/formatCurrencyBRL";
 
 export default function Dashboard() {
   const { summary, inventory } = useSummary();
+  const { products } = useProduct();
 
   return (
     <S.Main>
@@ -54,7 +57,22 @@ export default function Dashboard() {
           </S.CardDefaultDashboard>
           <S.CardDefaultDashboard>
             <h2>Top produtos por estoque</h2>
-            <p>Cadastre seu primeiro produto.</p>
+            {products.length === 0 && <p>Cadastre seu primeiro produto.</p>}
+
+            <S.ListProducts>
+              {products.map((product) => (
+                <S.ProductItem key={product.id}>
+                  <div>
+                    <p>{product.nome}</p>
+                    <p>
+                      Custo {formatCurrencyBRL(product.preco_custo)} · Venda{" "}
+                      {formatCurrencyBRL(product.preco_venda)}
+                    </p>
+                  </div>
+                  <p className="estoque">{product.quantidade_estoque}</p>
+                </S.ProductItem>
+              ))}
+            </S.ListProducts>
           </S.CardDefaultDashboard>
         </S.DashboardCardGroup>
       </S.Wrapper>

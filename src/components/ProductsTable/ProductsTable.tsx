@@ -1,11 +1,12 @@
 import { BiPencil } from "react-icons/bi";
 import * as S from "./style";
 import { FiTrash2 } from "react-icons/fi";
-import useProduct from "../../hooks/useProduct/useProduct";
 import { formatCurrencyBRL } from "../../utils/formatCurrencyBRL";
+import type { ProductsTableProps } from "./type";
 
-export function ProductsTable() {
-  const { products } = useProduct();
+export function ProductsTable({ products, deleteProduct }: ProductsTableProps) {
+  const sortedProducts = products.sort((a, b) => a.id - b.id);
+
   return (
     <S.TableContainer>
       <S.Table>
@@ -21,8 +22,8 @@ export function ProductsTable() {
         </thead>
 
         <tbody>
-          {products &&
-            products.map((product) => (
+          {sortedProducts &&
+            sortedProducts.map((product) => (
               <tr key={product.id}>
                 <td>
                   <S.ProductInfo>
@@ -59,7 +60,12 @@ export function ProductsTable() {
                       <BiPencil size={19} />
                     </S.IconButton>
 
-                    <S.DeleteButton title="Excluir">
+                    <S.DeleteButton
+                      title="Excluir"
+                      onClick={async () => {
+                        await deleteProduct(product.id);
+                      }}
+                    >
                       <FiTrash2 />
                     </S.DeleteButton>
                   </S.Actions>
