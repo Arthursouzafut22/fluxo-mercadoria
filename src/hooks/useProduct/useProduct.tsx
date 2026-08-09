@@ -13,6 +13,7 @@ export default function useProduct() {
   const [products, setProducts] = React.useState<ProductProps[]>([]);
   const [loading, setLoading] = React.useState(true);
 
+  // Criar produto...
   async function onsubmit(data: FormProductType) {
     try {
       const payload = await CreateProduct.execute(data);
@@ -29,6 +30,7 @@ export default function useProduct() {
     }
   }
 
+  // Listar produtos...
   React.useEffect(() => {
     if (!token) return;
 
@@ -48,27 +50,45 @@ export default function useProduct() {
     allProducts();
   }, [token]);
 
+  // Deletar produto...
   async function deleteProduct(id: number) {
     try {
+      setLoading(true);
       await DeleteProduct.execute(id, setProducts);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   }
 
-  async function onsubmitUpdate(data: FormProductType, id: number) {
+  // Atualizar produto...
+  async function onSubmitUpdate(data: FormProductType, id: number) {
     try {
-      const payload = await UpdateProduct.execute(data, id);
+      const response = await UpdateProduct.execute(data, id);
 
-      if (payload) {
-        // Substitui o produto antigo pelo atualizado na lista
+      if (response && response.success && response.data) {
+        const item = response.data;
+
+        const updatedProduct: ProductProps = {
+          id: item.id,
+          nome: item.nome,
+          descricao: item.descricao,
+          categoria: item.categoria,
+          preco_custo: item.preco_custo,
+          preco_venda: item.preco_venda,
+          quantidade_estoque: item.quantidade_estoque,
+          lucro: item.lucro,
+          usuario_id: item.usuario_id,
+        };
+
         setProducts((prevProducts) =>
           prevProducts.map((product) =>
-            product.id === id ? payload.data : product
+            product.id === id ? updatedProduct : product
           )
         );
 
-        toast.success(payload.message || "Produto atualizado com sucesso!");
+        toast.success(response.message || "Produto atualizado com sucesso!");
         return true;
       }
     } catch (error: unknown) {
@@ -78,5 +98,5 @@ export default function useProduct() {
     }
   }
 
-  return { onsubmit, products, loading, deleteProduct, onsubmitUpdate };
+  return { onsubmit, products, loading, deleteProduct, onSubmitUpdate };
 }

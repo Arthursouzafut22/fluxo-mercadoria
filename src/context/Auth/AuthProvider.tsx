@@ -9,11 +9,11 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   function login(accessToken: string, refreshToken: string) {
     authStorage.setTokens(accessToken, refreshToken);
-    setToken(token);
+    setToken(accessToken);
   }
 
   function logout() {
-    localStorage.removeItem("accessToken");
+    authStorage.clearTokens();
     setToken(null);
     window.location.href = "/login";
   }

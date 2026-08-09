@@ -5,8 +5,8 @@ import type { FormProductType } from "../FormProduct/type";
 import Loading from "../Loading/Loading";
 import * as S from "./style";
 import { Input } from "../Input/Input";
-import type { FormProductUpdateProps } from "./type";
-import { useEffect } from "react";
+import type { FormProductUpdateProps, FormProductUpdateType } from "./type";
+import { COLORS } from "../../styles/Colors";
 
 export default function FormProductUpdate({
   closeModalUpdate,
@@ -20,34 +20,18 @@ export default function FormProductUpdate({
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<FormProductType>({
-    resolver: yupResolver(SchemaProduct) as Resolver<FormProductType>,
+    resolver: yupResolver(SchemaProduct) as Resolver<FormProductUpdateType>,
 
     defaultValues: {
-      quantidade_estoque: 1,
+      nome: product?.nome || "",
+      descricao: product?.descricao || "",
+      preco_custo: product?.preco_custo || 1,
+      preco_venda: product?.preco_venda || 1,
+      quantidade_estoque: product?.quantidade_estoque || 1,
     },
   });
 
-  useEffect(() => {
-    if (product) {
-      reset({
-        nome: product.nome,
-        descricao: product.descricao || undefined,
-        preco_custo: product.preco_custo,
-        preco_venda: product.preco_venda,
-        quantidade_estoque: product.quantidade_estoque,
-      });
-    } else {
-      reset({
-        nome: "",
-        descricao: "",
-        preco_custo: 1,
-        preco_venda: 1,
-        quantidade_estoque: 1,
-      });
-    }
-  }, [product, reset]);
-
-  async function handleFormSubmit(data: FormProductType) {
+  async function handleFormSubmit(data: FormProductUpdateType) {
     if (!product) return;
 
     const success = await onsubmit(data, product.id);
@@ -109,7 +93,11 @@ export default function FormProductUpdate({
             Cancelar
           </S.Button>
           <S.Button type="submit">
-            {isSubmitting ? <Loading /> : "Salvar"}
+            {isSubmitting ? (
+              <Loading size={10} color={COLORS.primary_card} />
+            ) : (
+              "Salvar"
+            )}
           </S.Button>
         </S.BoxButton>
       </S.Form>

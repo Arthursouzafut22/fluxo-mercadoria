@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SchemaRegister } from "../../schemas/registerSchema";
 import Toast from "../../components/toast/Toast";
 import Loading from "../../components/Loading/Loading";
+import { COLORS } from "../../styles/Colors";
 
 export default function Register() {
   const { onsubmit } = useRegister();
@@ -53,7 +54,11 @@ export default function Register() {
               {...register("password", { required: true })}
             />
             <Button disabled={isSubmitting}>
-              {isSubmitting ? <Loading /> : "Criar conta"}
+              {isSubmitting ? (
+                <Loading size={10} color={COLORS.primary_card} />
+              ) : (
+                "Criar conta"
+              )}
             </Button>
 
             <p>

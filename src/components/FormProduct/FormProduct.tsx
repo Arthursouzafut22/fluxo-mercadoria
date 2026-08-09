@@ -5,8 +5,13 @@ import type { FormProductProps, FormProductType } from "./type";
 import { SchemaProduct } from "../../schemas/productSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Loading from "../Loading/Loading";
+import { COLORS } from "../../styles/Colors";
 
-export default function FormProduct({ closeModal, onsubmit, title }: FormProductProps) {
+export default function FormProduct({
+  closeModal,
+  onsubmit,
+  title,
+}: FormProductProps) {
   const {
     register,
     reset,
@@ -80,7 +85,11 @@ export default function FormProduct({ closeModal, onsubmit, title }: FormProduct
             Cancelar
           </S.Button>
           <S.Button type="submit">
-            {isSubmitting ? <Loading /> : "Salvar"}
+            {isSubmitting ? (
+              <Loading size={10} color={COLORS.primary_card} />
+            ) : (
+              "Salvar"
+            )}
           </S.Button>
         </S.BoxButton>
       </S.Form>

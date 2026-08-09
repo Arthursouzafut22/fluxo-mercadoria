@@ -9,14 +9,21 @@ import { ProductsTable } from "../../components/ProductsTable/ProductsTable";
 import useProduct from "../../hooks/useProduct/useProduct";
 import FormProductUpdate from "../../components/FormProductUpdate/FormProductUpdate";
 import type { ProductProps } from "../../services/product/type";
+import Loading from "../../components/Loading/Loading";
+import { COLORS } from "../../styles/Colors";
+import ConfirmModal from "../../components/ConfirmDelete/ConfirmDelete";
 
 export default function Products() {
   const [active, setActive] = useState(false);
+  const [activeDelete, setActiveDelete] = useState(false);
   const [activeUpdate, setActiveUpdate] = useState(false);
+  const [productToDelete, setProductToDelete] = useState<ProductProps | null>(
+    null
+  );
   const [selectedProduct, setSelectedProduct] = useState<ProductProps | null>(
     null
   );
-  const { products, onsubmit, deleteProduct, onsubmitUpdate } = useProduct();
+  const { products, onsubmit, deleteProduct, onSubmitUpdate, loading } = useProduct();
 
   const openModal = () => setActive(true);
   const closeModal = () => setActive(false);
@@ -30,6 +37,24 @@ export default function Products() {
     setSelectedProduct(null);
     setActiveUpdate(false);
   };
+
+  const openModalDelete = (product: ProductProps) => {
+    setProductToDelete(product);
+    setActiveDelete(true);
+  };
+
+  const closeModalDelete = () => {
+    setProductToDelete(null);
+    setActiveDelete(false);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (productToDelete) {
+      await deleteProduct(productToDelete.id);
+      closeModalDelete();
+    }
+  };
+
   return (
     <S.Main>
       <S.Wrapper>
@@ -41,20 +66,24 @@ export default function Products() {
           </S.Button>
         </S.Div>
 
-        {products.length === 0 && (
+        {products.length === 0 && !loading && (
           <S.EmptyState>
             <p>Nenhum produto cadastrado.</p>
             <button onClick={openModal}>Cadastrar o primeiro</button>
           </S.EmptyState>
         )}
 
-        {products.length > 0 && (
+        {loading ? (
+          <div className="wrapper-loading">
+            <Loading size={22} color={COLORS.primary_yellow} />
+          </div>
+        ) : products.length > 0 ? (
           <ProductsTable
             products={products}
-            deleteProduct={deleteProduct}
+            openModalDelete={openModalDelete}
             openModal={openModalUpdate}
           />
-        )}
+        ) : null}
       </S.Wrapper>
       <Activity mode={active ? "visible" : "hidden"}>
         <LayoutModal closeModal={closeModal}>
@@ -68,10 +97,23 @@ export default function Products() {
       <Activity mode={activeUpdate ? "visible" : "hidden"}>
         <LayoutModal closeModal={closeModalUpdate}>
           <FormProductUpdate
+            key={selectedProduct?.id ?? "empty"}
             closeModalUpdate={closeModalUpdate}
-            onsubmit={onsubmitUpdate}
+            onsubmit={onSubmitUpdate}
             title="Editar produto"
             product={selectedProduct}
+          />
+        </LayoutModal>
+      </Activity>
+      <Activity mode={activeDelete ? "visible" : "hidden"}>
+        <LayoutModal closeModal={closeModalDelete}>
+          <ConfirmModal
+            isOpen={activeDelete}
+            title="Excluir produto"
+            message={`Tem certeza que deseja remover esse produto? Esta ação não poderá ser desfeita.`}
+            onClose={closeModalDelete}
+            onConfirm={handleConfirmDelete}
+            loading={loading}
           />
         </LayoutModal>
       </Activity>

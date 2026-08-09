@@ -6,7 +6,7 @@ import type { ProductsTableProps } from "./type";
 
 export function ProductsTable({
   products,
-  deleteProduct,
+  openModalDelete,
   openModal,
 }: ProductsTableProps) {
   const sortedProducts = products.sort((a, b) => a.id - b.id);
@@ -69,8 +69,8 @@ export function ProductsTable({
 
                     <S.DeleteButton
                       title="Excluir"
-                      onClick={async () => {
-                        await deleteProduct(product.id);
+                      onClick={() => {
+                        openModalDelete(product);
                       }}
                     >
                       <FiTrash2 />

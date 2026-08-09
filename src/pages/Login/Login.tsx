@@ -9,6 +9,7 @@ import type { LoginForm } from "./types/type";
 import Toast from "../../components/toast/Toast";
 import { useLoginForm } from "../../hooks/useLoginForm/useLoginForm ";
 import Loading from "../../components/Loading/Loading";
+import { COLORS } from "../../styles/Colors";
 
 export default function Login() {
   const {
@@ -40,7 +41,13 @@ export default function Login() {
               id="password"
               {...register("password", { required: true })}
             />
-            <Button>{isSubmitting ? <Loading /> : "Entrar"}</Button>
+            <Button>
+              {isSubmitting ? (
+                <Loading size={10} color={COLORS.primary_card} />
+              ) : (
+                "Entrar"
+              )}
+            </Button>
 
             <p>
               Ainda não tem uma conta?{" "}

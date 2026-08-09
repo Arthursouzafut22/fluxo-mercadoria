@@ -7,6 +7,14 @@ export const Wrapper = styled.div`
   max-width: 78rem;
   margin: 0 auto;
   padding: 1rem 1.5rem;
+
+  .wrapper-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 350px;
+    width: 100%;
+  }
 `;
 
 export const Div = styled.div`
