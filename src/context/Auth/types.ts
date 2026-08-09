@@ -1,6 +1,6 @@
 export type Auth = {
   token: string | null;
-  login: (token: string) => void;
+  login: (accessToken: string, refreshToken: string) => void;
   logout: () => void;
   getUser?: () => User;
 };

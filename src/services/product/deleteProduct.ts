@@ -1,19 +1,15 @@
 import { toast } from "react-toastify";
-import { API_URL } from "../api";
+import { apiFetch } from "../../api/apiClient";
 import type { ProductProps } from "./type";
 
 export class DeleteProduct {
   public static async execute(
-    token: string,
     id: number,
     setProducts: React.Dispatch<React.SetStateAction<ProductProps[]>>
   ) {
     try {
-      const result = await fetch(API_URL + `/produtos/${id}`, {
+      const result = await apiFetch(`/produtos/${id}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
 
       if (!result.ok) {
@@ -32,6 +28,7 @@ export class DeleteProduct {
       return payload;
     } catch (error) {
       console.error("Erro detalhado na captura:", error);
+      toast.error("Erro ao excluir produto, Tente mais tarde.");
       throw error;
     }
   }

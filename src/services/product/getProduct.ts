@@ -1,14 +1,11 @@
-import { API_URL } from "../api";
+import { apiFetch } from "../../api/apiClient";
 import type { ProductProps } from "./type";
 
 export class GetProducts {
-  public static async execute(token: string): Promise<ProductProps[]> {
+  public static async execute(): Promise<ProductProps[]> {
     try {
-      const result = await fetch(API_URL + "/produtos", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+      const result = await apiFetch("/produtos", {
+        method: "GET",
       });
 
       const payload = await result.json();

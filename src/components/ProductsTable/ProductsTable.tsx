@@ -4,7 +4,11 @@ import { FiTrash2 } from "react-icons/fi";
 import { formatCurrencyBRL } from "../../utils/formatCurrencyBRL";
 import type { ProductsTableProps } from "./type";
 
-export function ProductsTable({ products, deleteProduct }: ProductsTableProps) {
+export function ProductsTable({
+  products,
+  deleteProduct,
+  openModal,
+}: ProductsTableProps) {
   const sortedProducts = products.sort((a, b) => a.id - b.id);
 
   return (
@@ -56,7 +60,10 @@ export function ProductsTable({ products, deleteProduct }: ProductsTableProps) {
 
                 <td className="td-buttoes">
                   <S.Actions>
-                    <S.IconButton title="Editar">
+                    <S.IconButton
+                      title="Editar"
+                      onClick={() => openModal(product)}
+                    >
                       <BiPencil size={19} />
                     </S.IconButton>
 

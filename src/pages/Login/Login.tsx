@@ -36,6 +36,7 @@ export default function Login() {
             />
             <Input
               label="Senha"
+              type="password"
               id="password"
               {...register("password", { required: true })}
             />

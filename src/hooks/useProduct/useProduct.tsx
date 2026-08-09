@@ -6,6 +6,7 @@ import React from "react";
 import type { ProductProps } from "../../services/product/type";
 import { GetProducts } from "../../services/product/getProduct";
 import { DeleteProduct } from "../../services/product/deleteProduct";
+import { UpdateProduct } from "../../services/product/updateProduct";
 
 export default function useProduct() {
   const { token } = useAuth();
@@ -14,7 +15,7 @@ export default function useProduct() {
 
   async function onsubmit(data: FormProductType) {
     try {
-      const payload = await CreateProduct.execute(data, token as string);
+      const payload = await CreateProduct.execute(data);
 
       if (payload) {
         setProducts((prevProducts) => [...prevProducts, payload.data]);
@@ -35,7 +36,7 @@ export default function useProduct() {
       try {
         setLoading(true);
 
-        const productList = await GetProducts.execute(token as string);
+        const productList = await GetProducts.execute();
 
         setProducts(productList);
       } catch (error) {
@@ -49,11 +50,33 @@ export default function useProduct() {
 
   async function deleteProduct(id: number) {
     try {
-      await DeleteProduct.execute(String(token), id, setProducts);
+      await DeleteProduct.execute(id, setProducts);
     } catch (error) {
       console.error(error);
     }
   }
 
-  return { onsubmit, products, loading, deleteProduct };
+  async function onsubmitUpdate(data: FormProductType, id: number) {
+    try {
+      const payload = await UpdateProduct.execute(data, id);
+
+      if (payload) {
+        // Substitui o produto antigo pelo atualizado na lista
+        setProducts((prevProducts) =>
+          prevProducts.map((product) =>
+            product.id === id ? payload.data : product
+          )
+        );
+
+        toast.success(payload.message || "Produto atualizado com sucesso!");
+        return true;
+      }
+    } catch (error: unknown) {
+      console.log(error);
+      toast.error("Erro ao atualizar produto.");
+      return false;
+    }
+  }
+
+  return { onsubmit, products, loading, deleteProduct, onsubmitUpdate };
 }

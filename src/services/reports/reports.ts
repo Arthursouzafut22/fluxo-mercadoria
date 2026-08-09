@@ -1,14 +1,12 @@
-import { API_URL } from "../api";
+import { apiFetch } from "../../api/apiClient";
 
 export class Reports {
-  public static async GetSummaryReport(token: string) {
+  public static async GetSummaryReport() {
     try {
-      const response = await fetch(`${API_URL}/relatorios/resumo`, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+      const response = await apiFetch("/relatorios/resumo", {
+        method: "GET",
       });
+
       if (!response.ok) {
         throw new Error("Erro ao buscar relatório.");
       }
@@ -16,17 +14,16 @@ export class Reports {
       return await response.json();
     } catch (error: unknown) {
       console.log("Falha na conexão com o servidor", error);
+      throw error;
     }
   }
 
-  public static async GetInventoryReports(token: string) {
+  public static async GetInventoryReports() {
     try {
-      const response = await fetch(`${API_URL}/relatorios/estoque`, {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+      const response = await apiFetch("/relatorios/estoque", {
+        method: "GET",
       });
+
       if (!response.ok) {
         throw new Error("Erro ao buscar informações de estoque.");
       }
@@ -34,6 +31,7 @@ export class Reports {
       return await response.json();
     } catch (error: unknown) {
       console.log("Falha na conexão com o servidor", error);
+      throw error;
     }
   }
 }

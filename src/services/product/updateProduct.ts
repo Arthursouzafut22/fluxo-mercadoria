@@ -1,18 +1,18 @@
+import { apiFetch } from "../../api/apiClient";
 import type { FormProductType } from "../../components/FormProduct/type";
-import { apiFetch } from "../../api/apiClient"; 
 
-export class CreateProduct {
-  public static async execute(data: FormProductType) {
+export class UpdateProduct {
+  public static async execute(data: FormProductType, id: number) {
     try {
-      const result = await apiFetch("/produtos", {
-        method: "POST",
+      const result = await apiFetch(`/produtos/${id}`, {
+        method: "PUT",
         body: JSON.stringify(data),
       });
 
       const payload = await result.json();
 
       if (!result.ok) {
-        throw new Error("Erro ao criar produto.");
+        throw new Error("Erro ao atualizar produto.");
       }
 
       return payload;

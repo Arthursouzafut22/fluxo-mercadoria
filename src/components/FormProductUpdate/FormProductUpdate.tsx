@@ -1,12 +1,19 @@
 import { useForm, type Resolver } from "react-hook-form";
-import { Input } from "../Input/Input";
-import * as S from "./style";
-import type { FormProductProps, FormProductType } from "./type";
 import { SchemaProduct } from "../../schemas/productSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
+import type { FormProductType } from "../FormProduct/type";
 import Loading from "../Loading/Loading";
+import * as S from "./style";
+import { Input } from "../Input/Input";
+import type { FormProductUpdateProps } from "./type";
+import { useEffect } from "react";
 
-export default function FormProduct({ closeModal, onsubmit, title }: FormProductProps) {
+export default function FormProductUpdate({
+  closeModalUpdate,
+  onsubmit,
+  title,
+  product,
+}: FormProductUpdateProps) {
   const {
     register,
     reset,
@@ -20,17 +27,39 @@ export default function FormProduct({ closeModal, onsubmit, title }: FormProduct
     },
   });
 
+  useEffect(() => {
+    if (product) {
+      reset({
+        nome: product.nome,
+        descricao: product.descricao || undefined,
+        preco_custo: product.preco_custo,
+        preco_venda: product.preco_venda,
+        quantidade_estoque: product.quantidade_estoque,
+      });
+    } else {
+      reset({
+        nome: "",
+        descricao: "",
+        preco_custo: 1,
+        preco_venda: 1,
+        quantidade_estoque: 1,
+      });
+    }
+  }, [product, reset]);
+
   async function handleFormSubmit(data: FormProductType) {
-    const success = await onsubmit(data);
+    if (!product) return;
+
+    const success = await onsubmit(data, product.id);
     if (success) {
       reset();
-      closeModal();
+      closeModalUpdate();
     }
   }
 
   function handleCancel() {
     reset();
-    closeModal();
+    closeModalUpdate();
   }
 
   return (

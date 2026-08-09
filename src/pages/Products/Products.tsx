@@ -7,14 +7,29 @@ import { FiPlus } from "react-icons/fi";
 import Toast from "../../components/toast/Toast";
 import { ProductsTable } from "../../components/ProductsTable/ProductsTable";
 import useProduct from "../../hooks/useProduct/useProduct";
+import FormProductUpdate from "../../components/FormProductUpdate/FormProductUpdate";
+import type { ProductProps } from "../../services/product/type";
 
 export default function Products() {
   const [active, setActive] = useState(false);
-  const { products, onsubmit, deleteProduct } = useProduct();
+  const [activeUpdate, setActiveUpdate] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<ProductProps | null>(
+    null
+  );
+  const { products, onsubmit, deleteProduct, onsubmitUpdate } = useProduct();
 
   const openModal = () => setActive(true);
   const closeModal = () => setActive(false);
 
+  const openModalUpdate = (product: ProductProps) => {
+    setSelectedProduct(product);
+    setActiveUpdate(true);
+  };
+
+  const closeModalUpdate = () => {
+    setSelectedProduct(null);
+    setActiveUpdate(false);
+  };
   return (
     <S.Main>
       <S.Wrapper>
@@ -34,12 +49,30 @@ export default function Products() {
         )}
 
         {products.length > 0 && (
-          <ProductsTable products={products} deleteProduct={deleteProduct} />
+          <ProductsTable
+            products={products}
+            deleteProduct={deleteProduct}
+            openModal={openModalUpdate}
+          />
         )}
       </S.Wrapper>
       <Activity mode={active ? "visible" : "hidden"}>
         <LayoutModal closeModal={closeModal}>
-          <FormProduct closeModal={closeModal} onsubmit={onsubmit} />
+          <FormProduct
+            closeModal={closeModal}
+            onsubmit={onsubmit}
+            title="Novo produto"
+          />
+        </LayoutModal>
+      </Activity>
+      <Activity mode={activeUpdate ? "visible" : "hidden"}>
+        <LayoutModal closeModal={closeModalUpdate}>
+          <FormProductUpdate
+            closeModalUpdate={closeModalUpdate}
+            onsubmit={onsubmitUpdate}
+            title="Editar produto"
+            product={selectedProduct}
+          />
         </LayoutModal>
       </Activity>
       <Toast />
