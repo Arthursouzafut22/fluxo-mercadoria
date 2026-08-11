@@ -29,7 +29,6 @@ export const Button = styled.div`
   justify-content: center;
   gap: calc(0.25rem * 2);
   font-weight: 500;
-  /* color: ${"#0a0704"}; */
   background-color: ${COLORS.primary_yellow};
   padding-block: calc(0.25rem * 2.5);
   padding-inline: calc(0.25rem * 4);

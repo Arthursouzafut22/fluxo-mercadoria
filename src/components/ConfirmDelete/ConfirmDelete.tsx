@@ -39,6 +39,7 @@ const S = {
     max-width: 400px;
     background-color: ${COLORS.primary_card};
     border-radius: 16px;
+    border: 1px solid #312d28;
 
     h3 {
       color: ${COLORS.primary_font_color};
