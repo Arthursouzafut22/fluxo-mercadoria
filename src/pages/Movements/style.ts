@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLORS } from "../../styles/Colors";
+// import { COLORS } from "../../styles/Colors";
 
 export const Main = styled.main`
   h1 {
