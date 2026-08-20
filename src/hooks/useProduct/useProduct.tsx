@@ -1,6 +1,5 @@
 import { toast } from "react-toastify";
 import type { FormProductType } from "../../components/FormProduct/type";
-import { useAuth } from "../../context/Auth/useAuth";
 import { CreateProduct } from "../../services/product/createProduct";
 import React from "react";
 import type { ProductProps } from "../../services/product/type";
@@ -9,7 +8,6 @@ import { DeleteProduct } from "../../services/product/deleteProduct";
 import { UpdateProduct } from "../../services/product/updateProduct";
 
 export default function useProduct() {
-  const { token } = useAuth();
   const [products, setProducts] = React.useState<ProductProps[]>([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -32,14 +30,10 @@ export default function useProduct() {
 
   // Listar produtos...
   React.useEffect(() => {
-    if (!token) return;
-
     async function allProducts() {
       try {
         setLoading(true);
-
         const productList = await GetProducts.execute();
-
         setProducts(productList);
       } catch (error) {
         console.error(error);
@@ -48,7 +42,7 @@ export default function useProduct() {
       }
     }
     allProducts();
-  }, [token]);
+  }, []);
 
   // Deletar produto...
   async function deleteProduct(id: number) {

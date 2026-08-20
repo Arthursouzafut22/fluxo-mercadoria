@@ -19,6 +19,7 @@ export const Table = styled.table`
   border-collapse: collapse;
   table-layout: fixed;
 
+  /* Tablet: mantém a tabela "real" com scroll horizontal */
   @media (max-width: 1024px) and (min-width: 641px) {
     min-width: 900px;
   }
@@ -64,7 +65,8 @@ export const Table = styled.table`
     background: rgba(255, 255, 255, 0.02);
   }
 
-  @media (max-width: 979px) {
+  /* Mobile: transforma cada linha em um "card", sem scroll horizontal */
+  @media (max-width: 998px) {
     min-width: 0;
     display: block;
 
@@ -136,13 +138,47 @@ export const ProductName = styled.strong`
 export const ProductDescription = styled.span`
   color: ${COLORS.primary_font_color};
   font-size: 0.875rem;
-  line-height: calc(1 / 0.75);
+  line-height: calc(1.25 / 0.875);
+`;
+
+export const DateText = styled.span`
+  color: ${COLORS.primary_font_color};
+  font-size: 0.875rem;
+  line-height: calc(1.25 / 0.875);
+`;
+
+export const Quantity = styled.span`
+  color: ${COLORS.primary_font_foreground};
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: calc(1.25 / 0.875);
 `;
 
 export const Cost = styled.span`
   color: ${COLORS.primary_font_color};
   font-size: 0.875rem;
   line-height: calc(1.25 / 0.875);
+`;
+
+export const Total = styled.span`
+  color: ${COLORS.primary_font_foreground};
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: calc(1.25 / 0.875);
+`;
+
+export const TypeBadge = styled.span<{ $type: number }>`
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  background: ${({ $type }) =>
+    $type === 1 ? "#2b2b2b" : "rgba(255, 77, 79, 0.12)"};
+  color: ${({ $type }) => ($type === 1 ? "#e6dfd8" : "#ff4d4f")};
 `;
 
 export const SellingPrice = styled.span`

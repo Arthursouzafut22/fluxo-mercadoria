@@ -29,7 +29,7 @@ export function ProductsTable({
           {sortedProducts &&
             sortedProducts.map((product) => (
               <tr key={product.id}>
-                <td>
+                <td data-label="Nome">
                   <S.ProductInfo>
                     <S.ProductName>{product.nome}</S.ProductName>
                     <S.ProductDescription>
@@ -38,27 +38,27 @@ export function ProductsTable({
                   </S.ProductInfo>
                 </td>
 
-                <td>
+                <td data-label="Custo">
                   <S.Cost>{formatCurrencyBRL(product.preco_custo)}</S.Cost>
                 </td>
 
-                <td>
+                <td data-label="Venda">
                   <S.SellingPrice>
                     {formatCurrencyBRL(product.preco_venda)}
                   </S.SellingPrice>
                 </td>
 
-                <td>
+                <td data-label="Estoque">
                   <S.Stock>{product.quantidade_estoque}</S.Stock>
                 </td>
 
-                <td>
+                <td data-label="Lucro Un.">
                   <S.Profit>
                     {formatCurrencyBRL(Math.abs(product.lucro))}
                   </S.Profit>
                 </td>
 
-                <td className="td-buttoes">
+                <td data-label="Ações" className="td-buttoes">
                   <S.Actions>
                     <S.IconButton
                       title="Editar"

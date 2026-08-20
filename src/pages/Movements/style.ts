@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLORS } from "../../styles/Colors";
 // import { COLORS } from "../../styles/Colors";
 
 export const Main = styled.main`
@@ -11,6 +12,14 @@ export const Wrapper = styled.div`
   max-width: 78rem;
   margin: 0 auto;
   padding: 1rem 1.5rem;
+
+  .wrapper-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 350px;
+    width: 100%;
+  }
 `;
 export const Div = styled.div`
   display: flex;
@@ -53,7 +62,7 @@ export const Button = styled.button<{
 export const TransactionFilterTabs = styled.div`
   display: flex;
   gap: calc(0.25rem * 1);
-  padding: calc(0.25rem * 1);
+  padding: calc(.25rem * 1);
   border-radius: calc(0.5rem - 2px);
   background-color: #24211e;
   width: fit-content;
@@ -66,5 +75,21 @@ export const TransactionFilterTabs = styled.div`
     padding-inline: calc(0.25rem * 4);
     border-radius: 0.25rem;
     cursor: pointer;
+    border: none;
+    background-color: transparent;
+  }
+`;
+
+export const EmptyState = styled.div`
+  padding: calc(0.25rem * 12);
+  border-radius: calc(0.5rem + 4px);
+  background-color: ${COLORS.primary_card};
+  border: 1px solid #312d28;
+  text-align: center;
+  margin-top: calc(0.25rem * 8);
+
+  p {
+    color: ${COLORS.primary_font_color};
+    font-size: 0.875rem;
   }
 `;
