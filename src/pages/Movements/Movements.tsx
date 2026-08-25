@@ -8,13 +8,14 @@ import MovementsTable from "../../components/MovementsTable/MovementsTable";
 import Loading from "../../components/Loading/Loading";
 import LayoutModal from "../../components/LayoutModal/LayoutModal";
 import FormMovementsEntry from "../../components/FormMovementsEntry/FormMovementsEntry";
-
-const textButtons = ["TODAS", "ENTRADA", "SAIDA"];
+import Toast from "../../components/toast/Toast";
+import { textButtons } from "../../utils/textButtons";
 
 export default function Movements() {
   const [index, setIndex] = useState(0);
   const [active, setActive] = useState(false);
-  const { movements, loading } = useMovements();
+  const { movements, loading, handleCreateEntryMovementSubmit } =
+    useMovements();
 
   function teste(index: number) {
     setIndex(index);
@@ -78,9 +79,13 @@ export default function Movements() {
       </S.Wrapper>
       <Activity mode={active ? "visible" : "hidden"}>
         <LayoutModal closeModal={closeModal}>
-        <FormMovementsEntry/>
+          <FormMovementsEntry
+            onsubmit={handleCreateEntryMovementSubmit}
+            closeModal={closeModal}
+          />
         </LayoutModal>
       </Activity>
+      <Toast />
     </S.Main>
   );
 }

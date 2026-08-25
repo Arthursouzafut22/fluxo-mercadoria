@@ -87,6 +87,30 @@ export const BoxButton = styled.div`
   padding-top: calc(0.25rem * 2);
 `;
 
+export const Teste = styled.div`
+  /* display: grid;
+  align-items: center !important;
+  justify-content: space-between; */
+  width: 100%;
+  /* padding: 0.75rem; */
+  border: 1px solid wheat;
+  background-color: ${COLORS.primary_input};
+  border-radius: 6px;
+  /* font-size: 1rem; */
+  /* outline: 3px solid transparent; */
+  /* color: ${COLORS.primary_font_color}; */
+
+  .tt {
+    display: grid;
+    align-items: center !important;
+    justify-content: space-between;
+
+    span {
+      display: block !important;
+    }
+  }
+`;
+
 export const Button = styled.button<{ $color?: boolean }>`
   font-weight: 500;
   width: 100%;

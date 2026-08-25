@@ -1,32 +1,32 @@
 import { useForm } from "react-hook-form";
 import { Input } from "../Input/Input";
 import * as S from "./style";
-import type { FormMovementsEntryType } from "./type";
+import type { FormMovementsEntryType, FormType } from "./type";
 import Loading from "../Loading/Loading";
 import { COLORS } from "../../styles/Colors";
 import useProduct from "../../hooks/useProduct/useProduct";
 
-export default function FormMovementsEntry() {
+export default function FormMovementsEntry({ closeModal, onsubmit }: FormType) {
   const { products } = useProduct();
   const {
     register,
-    // reset,
+    reset,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<FormMovementsEntryType>();
 
   async function handleFormSubmit(data: FormMovementsEntryType) {
     console.log(data);
-    //   const success = await onsubmit(data, product.id);
-    //   if (success) {
-    //     reset();
-    //     closeModalUpdate();
-    //   }
+    const success = await onsubmit(data);
+    if (success) {
+      reset();
+      closeModal();
+    }
   }
 
   function handleCancel() {
-    //   reset();
-    //   closeModalUpdate();
+    reset();
+    closeModal();
   }
 
   return (
@@ -66,6 +66,13 @@ export default function FormMovementsEntry() {
         {/* <S.BoxInputStock>
         
         </S.BoxInputStock> */}
+
+        <S.Teste>
+          <div className="tt">
+            <span>Total</span>
+            <span>100</span>
+          </div>
+        </S.Teste>
 
         <Input label="Observação" id="Observação" {...register("observacao")} />
 
