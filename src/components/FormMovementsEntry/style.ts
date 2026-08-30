@@ -88,25 +88,27 @@ export const BoxButton = styled.div`
 `;
 
 export const Teste = styled.div`
-  /* display: grid;
-  align-items: center !important;
-  justify-content: space-between; */
   width: 100%;
-  /* padding: 0.75rem; */
-  border: 1px solid wheat;
   background-color: ${COLORS.primary_input};
   border-radius: 6px;
-  /* font-size: 1rem; */
-  /* outline: 3px solid transparent; */
-  /* color: ${COLORS.primary_font_color}; */
+  margin-bottom: 8px;
 
   .tt {
-    display: grid;
-    align-items: center !important;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
 
-    span {
-      display: block !important;
+    padding: 0.45rem 1rem;
+
+    p {
+      margin: 0;
+    }
+
+    .price {
+      font-size: 1rem;
+      color: ${COLORS.primary_yellow};
+      line-height: calc(1.75 / 1.125);
+      letter-spacing: -0.18px;
     }
   }
 `;

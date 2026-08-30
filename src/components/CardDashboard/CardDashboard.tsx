@@ -22,7 +22,7 @@ export default function CardDashboard({
       {isLoading ? (
         <Skeleton height="37px" />
       ) : (
-        <S.Value defaultColor={defaultColor}>
+        <S.Value $defaultColor={defaultColor}>
           {formatCurrencyBRL(value)}
         </S.Value>
       )}

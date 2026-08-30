@@ -22,9 +22,9 @@ export const Div = styled.div`
   }
 `;
 
-export const Value = styled.p<{ defaultColor?: string }>`
+export const Value = styled.p<{ $defaultColor?: string }>`
   font-size: 1.875rem;
-  color: ${({ defaultColor }) => defaultColor};
+  color: ${({ $defaultColor }) => $defaultColor};
   margin-top: calc(0.25rem * 3);
   letter-spacing: -0.01em;
 

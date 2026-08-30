@@ -5,18 +5,27 @@ import type { FormMovementsEntryType, FormType } from "./type";
 import Loading from "../Loading/Loading";
 import { COLORS } from "../../styles/Colors";
 import useProduct from "../../hooks/useProduct/useProduct";
+import { formatCurrencyBRL } from "../../utils/formatCurrencyBRL";
 
 export default function FormMovementsEntry({ closeModal, onsubmit }: FormType) {
   const { products } = useProduct();
   const {
     register,
     reset,
+    watch,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<FormMovementsEntryType>();
+  } = useForm<FormMovementsEntryType>({
+    defaultValues: {
+      quantidade: 1,
+    },
+  });
+
+  const quantidade = watch("quantidade");
+  const valor_unitario = watch("valor_unitario");
+  const total = Number(quantidade || 0) * Number(valor_unitario || 0);
 
   async function handleFormSubmit(data: FormMovementsEntryType) {
-    console.log(data);
     const success = await onsubmit(data);
     if (success) {
       reset();
@@ -63,14 +72,11 @@ export default function FormMovementsEntry({ closeModal, onsubmit }: FormType) {
             {...register("valor_unitario", { valueAsNumber: true })}
           />
         </S.BoxInputsFlex>
-        {/* <S.BoxInputStock>
-        
-        </S.BoxInputStock> */}
 
         <S.Teste>
           <div className="tt">
-            <span>Total</span>
-            <span>100</span>
+            <p>Total:</p>
+            <p className="price">{formatCurrencyBRL(total)}</p>
           </div>
         </S.Teste>
 

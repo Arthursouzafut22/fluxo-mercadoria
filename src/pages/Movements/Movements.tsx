@@ -12,14 +12,14 @@ import Toast from "../../components/toast/Toast";
 import { textButtons } from "../../utils/textButtons";
 
 export default function Movements() {
-  const [index, setIndex] = useState(0);
   const [active, setActive] = useState(false);
-  const { movements, loading, handleCreateEntryMovementSubmit } =
-    useMovements();
-
-  function teste(index: number) {
-    setIndex(index);
-  }
+  const {
+    movements,
+    loading,
+    handleCreateEntryMovementSubmit,
+    getMovementsType,
+    index,
+  } = useMovements();
 
   const openModal = () => setActive(true);
   const closeModal = () => setActive(false);
@@ -51,7 +51,7 @@ export default function Movements() {
           {textButtons.map((item, i) => (
             <button
               key={i}
-              onClick={() => teste(i)}
+              onClick={() => getMovementsType(i, item.toLocaleLowerCase())}
               style={{
                 background: i === index ? COLORS.primary_yellow : "",
                 color:
