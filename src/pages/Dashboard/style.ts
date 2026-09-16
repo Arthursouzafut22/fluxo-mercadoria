@@ -31,11 +31,18 @@ export const DashboardCardGroup = styled.div`
   }
 `;
 
-export const ListProducts = styled.ul`
+export const List = styled.ul`
   list-style: none;
+
+  span {
+    font-size: 0.75rem;
+    color: ${COLORS.primary_font_color};
+    display: block;
+    text-align: right;
+  }
 `;
 
-export const ProductItem = styled.li`
+export const Item = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-between;

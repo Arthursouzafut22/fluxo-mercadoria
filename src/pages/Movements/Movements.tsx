@@ -7,22 +7,46 @@ import useMovements from "../../hooks/useMovements/useMovements";
 import MovementsTable from "../../components/MovementsTable/MovementsTable";
 import Loading from "../../components/Loading/Loading";
 import LayoutModal from "../../components/LayoutModal/LayoutModal";
-import FormMovementsEntry from "../../components/FormMovementsEntry/FormMovementsEntry";
 import Toast from "../../components/toast/Toast";
 import { textButtons } from "../../utils/textButtons";
+import type {
+  MovementsProps,
+  TypeMovements,
+} from "../../services/movements/type";
+import FormMovements from "../../components/FormMovements/FormMovements";
+import { typeLabels } from "../../components/MovementsTable/type";
+import FormMovementsUpdate from "../../components/FormMovements/FormMovementsUpdate";
 
 export default function Movements() {
-  const [active, setActive] = useState(false);
+  const [activeEntry, setActiveEntry] = useState(false);
+  const [activeExit, setActiveExit] = useState(false);
+  const [activeUpdate, setActiveUpdate] = useState(false);
+  const [selectMovements, setSelectMovements] = useState<MovementsProps | null>(
+    null
+  );
   const {
     movements,
     loading,
     handleCreateEntryMovementSubmit,
     getMovementsType,
+    updateMovements,
     index,
   } = useMovements();
 
-  const openModal = () => setActive(true);
-  const closeModal = () => setActive(false);
+  const openModalEntry = () => setActiveEntry(true);
+  const closeModalEntry = () => setActiveEntry(false);
+
+  const openModalExit = () => setActiveExit(true);
+  const closeModalExit = () => setActiveExit(false);
+
+  const openModalUpdate = (data: MovementsProps) => {
+    setSelectMovements(data);
+    setActiveUpdate(true);
+  };
+  const closeModalUpdate = () => {
+    setSelectMovements(null);
+    setActiveUpdate(false);
+  };
 
   return (
     <S.Main>
@@ -32,7 +56,7 @@ export default function Movements() {
 
           <S.BoxButtons>
             <S.Button
-              onClick={openModal}
+              onClick={openModalEntry}
               $cor="transparent"
               $border="#312d28"
               $fontColor={COLORS.primary_font_foreground}
@@ -41,7 +65,7 @@ export default function Movements() {
               <LuDownload />
               Entrada
             </S.Button>
-            <S.Button onClick={() => 1 * 1} $cor={COLORS.primary_yellow}>
+            <S.Button onClick={openModalExit} $cor={COLORS.primary_yellow}>
               <LuUpload />
               Saida
             </S.Button>
@@ -51,7 +75,12 @@ export default function Movements() {
           {textButtons.map((item, i) => (
             <button
               key={i}
-              onClick={() => getMovementsType(i, item.toLocaleLowerCase())}
+              onClick={() =>
+                getMovementsType(
+                  i,
+                  item.toLocaleLowerCase() as TypeMovements | "todas"
+                )
+              }
               style={{
                 background: i === index ? COLORS.primary_yellow : "",
                 color:
@@ -74,14 +103,43 @@ export default function Movements() {
             <Loading size={22} color={COLORS.primary_yellow} />
           </div>
         ) : movements.length > 0 ? (
-          <MovementsTable movements={movements} onEdit={() => {}} />
+          <MovementsTable movements={movements} onEdit={openModalUpdate} />
         ) : null}
       </S.Wrapper>
-      <Activity mode={active ? "visible" : "hidden"}>
-        <LayoutModal closeModal={closeModal}>
-          <FormMovementsEntry
+      <Activity mode={activeEntry ? "visible" : "hidden"}>
+        <LayoutModal closeModal={closeModalEntry}>
+          <FormMovements
+            title="Registrar entrada"
+            description="Compra no atacado"
+            type="entradas"
             onsubmit={handleCreateEntryMovementSubmit}
-            closeModal={closeModal}
+            closeModal={closeModalEntry}
+          />
+        </LayoutModal>
+      </Activity>
+      <Activity mode={activeExit ? "visible" : "hidden"}>
+        <LayoutModal closeModal={closeModalExit}>
+          <FormMovements
+            title="Registrar saída"
+            description="Venda"
+            type="saidas"
+            onsubmit={handleCreateEntryMovementSubmit}
+            closeModal={closeModalExit}
+          />
+        </LayoutModal>
+      </Activity>
+      <Activity mode={activeUpdate ? "visible" : "hidden"}>
+        <LayoutModal closeModal={closeModalUpdate}>
+          <FormMovementsUpdate
+            id={selectMovements?.id ?? 0}
+            title="Editar movimentação"
+            description={
+              selectMovements
+                ? typeLabels[selectMovements.tipo_movimentacao]
+                : ""
+            }
+            onsubmit={updateMovements}
+            closeModal={closeModalUpdate}
           />
         </LayoutModal>
       </Activity>

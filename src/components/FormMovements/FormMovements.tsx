@@ -1,13 +1,19 @@
 import { useForm } from "react-hook-form";
 import { Input } from "../Input/Input";
 import * as S from "./style";
-import type { FormMovementsEntryType, FormType } from "./type";
+import type { FormMovementsType, FormType } from "./type";
 import Loading from "../Loading/Loading";
 import { COLORS } from "../../styles/Colors";
 import useProduct from "../../hooks/useProduct/useProduct";
 import { formatCurrencyBRL } from "../../utils/formatCurrencyBRL";
 
-export default function FormMovementsEntry({ closeModal, onsubmit }: FormType) {
+export default function FormMovements({
+  closeModal,
+  type,
+  description,
+  title,
+  onsubmit,
+}: FormType) {
   const { products } = useProduct();
   const {
     register,
@@ -15,7 +21,7 @@ export default function FormMovementsEntry({ closeModal, onsubmit }: FormType) {
     watch,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<FormMovementsEntryType>({
+  } = useForm<FormMovementsType>({
     defaultValues: {
       quantidade: 1,
     },
@@ -25,8 +31,8 @@ export default function FormMovementsEntry({ closeModal, onsubmit }: FormType) {
   const valor_unitario = watch("valor_unitario");
   const total = Number(quantidade || 0) * Number(valor_unitario || 0);
 
-  async function handleFormSubmit(data: FormMovementsEntryType) {
-    const success = await onsubmit(data);
+  async function handleFormSubmit(data: FormMovementsType) {
+    const success = await onsubmit(data, type);
     if (success) {
       reset();
       closeModal();
@@ -40,8 +46,8 @@ export default function FormMovementsEntry({ closeModal, onsubmit }: FormType) {
 
   return (
     <S.WrapperForm onClick={(e) => e.stopPropagation()}>
-      <h2>Registrar entrada</h2>
-      <p>Compra no atacado</p>
+      <h2>{title}</h2>
+      <p>{description}</p>
       <S.Form onSubmit={handleSubmit(handleFormSubmit)}>
         <select
           {...register("produto_id", { required: true, valueAsNumber: true })}
@@ -49,7 +55,7 @@ export default function FormMovementsEntry({ closeModal, onsubmit }: FormType) {
           <option value="">Selecione um produto</option>
           {products.map((i) => (
             <option key={i.id} value={Number(i.id)}>
-              {i.nome}
+              {i.nome} (estoque: {i.quantidade_estoque})
             </option>
           ))}
         </select>

@@ -1,10 +1,14 @@
 import React from "react";
-import type { MovementsProps } from "../../services/movements/type";
+import type {
+  MovementsProps,
+  TypeMovements,
+} from "../../services/movements/type";
 import { GetMovements } from "../../services/movements/getMovements";
-import type { FormMovementsEntryType } from "../../components/FormMovementsEntry/type";
 import { toast } from "react-toastify";
-import { CreateMovementsEntry } from "../../services/movements/createMovementsEntry";
 import { GetMovementsType } from "../../services/movements/getMovementsType";
+import { CreateMovements } from "../../services/movements/createMovements";
+import type { FormMovementsType } from "../../components/FormMovements/type";
+import { UpdateMovements } from "../../services/movements/updateMovements";
 
 export default function useMovements() {
   const [movements, setMovements] = React.useState<MovementsProps[]>([]);
@@ -12,9 +16,12 @@ export default function useMovements() {
   const [index, setIndex] = React.useState(0);
 
   // Criar movimentação de entrada...
-  async function handleCreateEntryMovementSubmit(data: FormMovementsEntryType) {
+  async function handleCreateEntryMovementSubmit(
+    data: FormMovementsType,
+    type: string
+  ) {
     try {
-      const payload = await CreateMovementsEntry.execute(data);
+      const payload = await CreateMovements.execute(data, type);
 
       if (payload) {
         setMovements((prevMovements) => [...prevMovements, payload.data]);
@@ -24,36 +31,42 @@ export default function useMovements() {
         return true;
       }
     } catch (error: unknown) {
-      console.log(error);
+      console.error(error);
       toast.error("Erro ao cadastrar movimento de entrada.");
       return false;
     }
   }
 
   // Listar movimentos...
+  const fetchAllMovements = React.useCallback(async () => {
+    const movementList = await GetMovements.execute();
+    setMovements(movementList);
+  }, []);
+
   React.useEffect(() => {
-    async function allMovements() {
+    async function load() {
       try {
         setLoading(true);
-        const movementList = await GetMovements.execute();
-        setMovements(movementList);
+        await fetchAllMovements();
       } catch (error) {
         console.error(error);
       } finally {
         setLoading(false);
       }
     }
-    allMovements();
-  }, []);
+    load();
+  }, [fetchAllMovements]);
 
   // Filtra os movimentos por tipo (Entrada/Saída).
-  async function getMovementsType(index: number, type: string) {
+  async function getMovementsType(
+    index: number,
+    type: TypeMovements | "todas"
+  ) {
     try {
       setIndex(index);
       setLoading(true);
       if (type === "todas") {
-        const movementList = await GetMovements.execute();
-        setMovements(movementList);
+        fetchAllMovements();
         return;
       }
       const movementListType = await GetMovementsType.execute(type);
@@ -65,8 +78,44 @@ export default function useMovements() {
     }
   }
 
+  // Atualizar movimentação..
+  async function updateMovements(
+    data: FormMovementsType,
+    id: number,
+    productId: number
+  ) {
+    try {
+      const response = await UpdateMovements.execute(data, id, productId);
+
+      if (response && response.success && response.data) {
+        const item = response.data;
+
+        setMovements((prevMovements) =>
+          prevMovements.map((movement) =>
+            movement.id === id
+              ? {
+                  ...movement,
+                  quantidade: item.quantidade,
+                  valor_unitario: item.valor_unitario,
+                  valor_total: item.valor_total,
+                  observacao: item.observacao,
+                }
+              : movement
+          )
+        );
+
+        toast.success(response.message || "Movimento atualizado com sucesso!");
+        return true;
+      }
+    } catch (error: unknown) {
+      console.error(error);
+      return false;
+    }
+  }
+
   return {
     handleCreateEntryMovementSubmit,
+    updateMovements,
     movements,
     loading,
     getMovementsType,

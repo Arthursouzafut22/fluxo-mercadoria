@@ -1,10 +1,10 @@
 import { apiFetch } from "../../api/apiClient";
-import type { FormMovementsEntryType } from "../../components/FormMovementsEntry/type";
+import type { FormMovementsType } from "../../components/FormMovements/type";
 
-export class CreateMovementsEntry {
-  public static async execute(data: FormMovementsEntryType) {
+export class CreateMovements {
+  public static async execute(data: FormMovementsType, type: string) {
     try {
-      const result = await apiFetch("/movimentacoes/entradas", {
+      const result = await apiFetch(`/movimentacoes/${type}`, {
         method: "POST",
         body: JSON.stringify(data),
       });

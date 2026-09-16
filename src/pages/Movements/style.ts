@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { COLORS } from "../../styles/Colors";
-// import { COLORS } from "../../styles/Colors";
 
 export const Main = styled.main`
   h1 {
@@ -25,6 +24,12 @@ export const Div = styled.div`
   display: flex;
   align-items: end;
   justify-content: space-between;
+
+  @media (max-width: 571px) {
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+  }
 `;
 
 export const BoxButtons = styled.div`
@@ -62,7 +67,7 @@ export const Button = styled.button<{
 export const TransactionFilterTabs = styled.div`
   display: flex;
   gap: calc(0.25rem * 1);
-  padding: calc(.25rem * 1);
+  padding: calc(0.25rem * 1);
   border-radius: calc(0.5rem - 2px);
   background-color: #24211e;
   width: fit-content;

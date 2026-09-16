@@ -7,10 +7,14 @@ import { LuDollarSign, LuPackage } from "react-icons/lu";
 import { COLORS } from "../../styles/Colors";
 import useProduct from "../../hooks/useProduct/useProduct";
 import { formatCurrencyBRL } from "../../utils/formatCurrencyBRL";
+import useMovements from "../../hooks/useMovements/useMovements";
+import { formatDate } from "../../utils/formatDate";
+import { typeLabels } from "../../components/MovementsTable/type";
 
 export default function Dashboard() {
   const { summary, inventory } = useSummary();
   const { products } = useProduct();
+  const { movements } = useMovements();
 
   return (
     <S.Main>
@@ -53,15 +57,38 @@ export default function Dashboard() {
         <S.DashboardCardGroup>
           <S.CardDefaultDashboard>
             <h2>Movimentações recentes</h2>
-            <p>Sem movimentações ainda.</p>
+            {movements.length === 0 && <p>Sem movimentações ainda.</p>}
+            <S.List>
+              {movements.map((movement) => (
+                <S.Item key={movement.id}>
+                  <div>
+                    <p>{movement.produto_nome}</p>
+                    <p>{formatDate(movement.data_registro)}</p>
+                  </div>
+                  <p style={{ color: COLORS.primary_yellow }}>
+                    {" "}
+                    + {formatCurrencyBRL(movement.valor_unitario)}
+                    <span
+                      style={{
+                        color: COLORS.primary_font_color,
+                        display: "block",
+                      }}
+                    >
+                      {movement.quantidade}x ·{" "}
+                      {typeLabels[movement.tipo_movimentacao]}
+                    </span>
+                  </p>
+                </S.Item>
+              ))}
+            </S.List>
           </S.CardDefaultDashboard>
           <S.CardDefaultDashboard>
             <h2>Top produtos por estoque</h2>
             {products.length === 0 && <p>Cadastre seu primeiro produto.</p>}
 
-            <S.ListProducts>
+            <S.List>
               {products.map((product) => (
-                <S.ProductItem key={product.id}>
+                <S.Item key={product.id}>
                   <div>
                     <p>{product.nome}</p>
                     <p>
@@ -70,9 +97,9 @@ export default function Dashboard() {
                     </p>
                   </div>
                   <p className="estoque">{product.quantidade_estoque}</p>
-                </S.ProductItem>
+                </S.Item>
               ))}
-            </S.ListProducts>
+            </S.List>
           </S.CardDefaultDashboard>
         </S.DashboardCardGroup>
       </S.Wrapper>

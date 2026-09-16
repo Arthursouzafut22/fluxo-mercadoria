@@ -1,22 +1,8 @@
 import { BiPencil } from "react-icons/bi";
-import type { MovementsProps } from "../../services/movements/type";
-import { TypeMovements } from "../../services/movements/type";
 import { formatCurrencyBRL } from "../../utils/formatCurrencyBRL";
 import * as S from "./style";
-
-type MovementsTableProps = {
-  movements: MovementsProps[];
-  onEdit: (movement: MovementsProps) => void;
-};
-
-const typeLabels: Record<TypeMovements, string> = {
-  [TypeMovements.Entrada]: "Entrada",
-  [TypeMovements.Saida]: "Saída",
-};
-
-function formatDate(date: Date) {
-  return new Date(date).toLocaleString("pt-BR");
-}
+import { formatDate } from "../../utils/formatDate";
+import { typeLabels, type MovementsTableProps } from "./type";
 
 export default function MovementsTable({
   movements,

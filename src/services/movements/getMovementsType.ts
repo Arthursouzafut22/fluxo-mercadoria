@@ -1,8 +1,10 @@
 import { apiFetch } from "../../api/apiClient";
-import type { MovementsProps } from "./type";
+import type { MovementsProps, TypeMovements } from "./type";
 
 export class GetMovementsType {
-  public static async execute(type: string): Promise<MovementsProps[]> {
+  public static async execute(
+    type: TypeMovements | "todas"
+  ): Promise<MovementsProps[]> {
     try {
       const result = await apiFetch(`/movimentacoes/${type}`, {
         method: "GET",
