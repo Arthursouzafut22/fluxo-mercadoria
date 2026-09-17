@@ -1,6 +1,6 @@
 <div align="center">
 
-# 📦 Stock Manager
+# 📦 Fluxo Mercadoria
 
 Sistema web para gerenciamento de estoque e fluxo de mercadorias, com dashboard, controle de produtos, movimentações, relatórios e autenticação de usuários.
 
@@ -35,25 +35,36 @@ O **Fluxo Mercadoria** é uma aplicação web desenvolvida para facilitar o gere
 ## 💾 Clonar Repositório
 
 ```bash
-git clone https://github.com/ArthurSouza/stock-manager.git
+git clone [https://github.com/Arthursouzafut22/fluxo-mercadoria.git]
 ```
 
 ## 🗂️ Estrutura do Projeto
 
 ```
-stock-manager/
+fluxo-mercadoria/
+├── public/
 ├── src/
+│   ├── api/
 │   ├── assets/
 │   ├── components/
-│   ├── contexts/
+│   ├── context/
 │   ├── hooks/
 │   ├── pages/
 │   ├── routes/
+│   ├── schemas/
 │   ├── services/
 │   ├── styles/
-│   └── App.tsx
-├── public/
+│   ├── types/
+│   ├── utils/
+│   ├── App.tsx
+│   └── main.tsx
+├── .env
+├── .gitignore
+├── eslint.config.js
+├── index.html
 ├── package.json
+├── tsconfig.json
+├── vite.config.ts
 └── README.md
 ```
 
@@ -61,7 +72,7 @@ stock-manager/
 
 **Arthur Souza**
 
-- GitHub: [@ArthurSouza](https://github.com/ArthurSouza)
+- GitHub: [@ArthurSouza22](https://github.com/Arthursouzafut22)
 
 ---
 
