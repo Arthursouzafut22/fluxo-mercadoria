@@ -25,7 +25,7 @@ O **Fluxo Mercadoria** é uma aplicação web desenvolvida para facilitar o gere
 - `React Router`
 - `Context API / Hooks`
 
-##⚙️ Funcionalidades
+## ⚙️ Funcionalidades
 
 - `🔐 Autenticação de usuários`
 - `📊 Dashboard com indicadores`
