@@ -1,77 +1,70 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 📦 Stock Manager
 
-Currently, two official plugins are available:
+Sistema web para gerenciamento de estoque e fluxo de mercadorias, com dashboard, controle de produtos, movimentações, relatórios e autenticação de usuários.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Styled Components](https://img.shields.io/badge/Styled--Components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 
-## React Compiler
+</div>
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+---
 
-Note: This will impact Vite dev & build performances.
+## 💻 Projeto
 
-## Expanding the ESLint configuration
+O **Fluxo Mercadoria** é uma aplicação web desenvolvida para facilitar o gerenciamento de estoque e o fluxo de mercadorias de um negócio. A plataforma centraliza o controle de produtos, movimentações de entrada e saída, geração de relatórios e autenticação de usuários, oferecendo uma visão completa por meio de um dashboard interativo.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ✅ Recursos Utilizados
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- `React`
+- `TypeScript`
+- `Styled Components`
+- `React Router`
+- `Context API / Hooks`
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📸 Screenshot
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+<div align="center">
+  <img width="1902" height="892" alt="1" src="https://github.com/user-attachments/assets/975ad803-df28-4af4-9246-b8be0c873bfb" />
+  <img width="1910" height="886" alt="2" src="https://github.com/user-attachments/assets/505d1f82-5578-42f2-a8ff-295ada38d97d" />
+</div>
 
+## 💾 Clonar Repositório
+
+```bash
+git clone https://github.com/ArthurSouza/stock-manager.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🗂️ Estrutura do Projeto
 
 ```
+stock-manager/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── contexts/
+│   ├── hooks/
+│   ├── pages/
+│   ├── routes/
+│   ├── services/
+│   ├── styles/
+│   └── App.tsx
+├── public/
+├── package.json
+└── README.md
+```
+
+## 👤 Autor
+
+**Arthur Souza**
+
+- GitHub: [@ArthurSouza](https://github.com/ArthurSouza)
+
+---
+
+<div align="center">
+  Feito com 💜 por Arthur Souza
+</div>
