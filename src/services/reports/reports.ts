@@ -34,4 +34,24 @@ export class Reports {
       throw error;
     }
   }
+
+  public static async DownloadReportPdf(inicio: string, fim: string) {
+    try {
+      const response = await apiFetch(
+        `/relatorios/exportar-pdf?dataInicio=${inicio}&dataFim=${fim}`,
+        {
+          method: "GET",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Erro ao buscar relatório.");
+      }
+
+      return await response.blob();
+    } catch (error: unknown) {
+      console.log("Falha na conexão com o servidor", error);
+      throw error;
+    }
+  }
 }

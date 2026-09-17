@@ -13,7 +13,7 @@ import { typeLabels } from "../../components/MovementsTable/type";
 
 export default function Dashboard() {
   const { summary, inventory } = useSummary();
-  const { products } = useProduct();
+  const { products, calculateStockQuantity } = useProduct();
   const { movements } = useMovements();
 
   return (
@@ -49,7 +49,7 @@ export default function Dashboard() {
             Icon={LuPackage}
             title={"Estoque"}
             value={inventory.valor_total_estoque}
-            description={"0 unidades"}
+            description={`${calculateStockQuantity()}` + " unidades"}
             defaultColor={COLORS.primary_font_foreground}
           />
         </S.WrapperCards>

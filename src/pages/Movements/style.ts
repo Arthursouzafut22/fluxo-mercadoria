@@ -47,6 +47,7 @@ export const Button = styled.button<{
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1rem;
   gap: calc(0.25rem * 2);
   font-weight: 500;
   border: 1px solid ${({ $border }) => $border};

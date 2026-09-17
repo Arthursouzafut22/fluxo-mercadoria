@@ -7,6 +7,7 @@ import { Layout } from "../components/Private/Layout";
 import Products from "../pages/Products/Products";
 import HomeRedirect from "../components/Private/HomeRedirect";
 import Movements from "../pages/Movements/Movements";
+import Reports from "../pages/Reports/Reports";
 
 export function RoutesAplicattion() {
   return (
@@ -22,6 +23,7 @@ export function RoutesAplicattion() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/produtos" element={<Products />} />
             <Route path="/movimentacoes" element={<Movements />} />
+            <Route path="/relatorios" element={<Reports />} />
           </Route>
         </Route>
       </Routes>

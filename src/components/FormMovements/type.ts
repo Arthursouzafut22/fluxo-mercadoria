@@ -19,5 +19,9 @@ export type FormTypeUpdate = {
   title: string;
   description: string;
   closeModal: () => void;
-  onsubmit: (data: FormMovementsType, id: number, productId: number) => Promise<boolean | undefined>;
+  onsubmit: (
+    data: FormMovementsType,
+    id: number,
+    productId: number
+  ) => Promise<boolean | undefined>;
 };

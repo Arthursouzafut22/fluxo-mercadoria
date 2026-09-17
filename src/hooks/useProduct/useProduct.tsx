@@ -22,7 +22,7 @@ export default function useProduct() {
         return true;
       }
     } catch (error: unknown) {
-      console.log(error);
+      console.error(error);
       toast.error("Erro ao cadastrar produto.");
       return false;
     }
@@ -43,6 +43,17 @@ export default function useProduct() {
     }
     allProducts();
   }, []);
+
+  // Calcular soma simples total de quantidade de estoque dos produtos..
+  function calculateStockQuantity() {
+    let soma = 0;
+
+    for (const product of products) {
+      soma += product.quantidade_estoque;
+    }
+
+    return soma;
+  }
 
   // Deletar produto...
   async function deleteProduct(id: number) {
@@ -92,5 +103,12 @@ export default function useProduct() {
     }
   }
 
-  return { onsubmit, products, loading, deleteProduct, onSubmitUpdate };
+  return {
+    onsubmit,
+    products,
+    loading,
+    deleteProduct,
+    onSubmitUpdate,
+    calculateStockQuantity,
+  };
 }

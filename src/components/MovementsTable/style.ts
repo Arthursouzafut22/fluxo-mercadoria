@@ -19,7 +19,6 @@ export const Table = styled.table`
   border-collapse: collapse;
   table-layout: fixed;
 
-  /* Tablet: mantém a tabela "real" com scroll horizontal */
   @media (max-width: 1024px) and (min-width: 641px) {
     min-width: 900px;
   }
@@ -65,7 +64,6 @@ export const Table = styled.table`
     background: rgba(255, 255, 255, 0.02);
   }
 
-  /* Mobile: transforma cada linha em um "card", sem scroll horizontal */
   @media (max-width: 998px) {
     min-width: 0;
     display: block;
